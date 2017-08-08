@@ -1,0 +1,31 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+body, html {
+    height: 100%;
+    background-image: url('tileable_wood_texture.png');
+    background-repeat:repeat;
+}
+
+.container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    height: 100%;
+}
+
+.container #main {
+    height: 600px;
+    width: 1200px;
+    padding: 15px;
+    background-color: #f1f1f1;
+}
+
+.container #mainContent, 
+.container #deals {
+  height: 490px;
+  overflow-y:scroll; 
+}

@@ -1,3 +1,10 @@
-<h1>
-  {{title}}
-</h1>
+<div class="container">
+    <div class='row' id='main'>
+        <app-navigation></app-navigation>
+
+        <div class="row">
+          <router-outlet></router-outlet>
+          <app-deals></app-deals>
+        </div>
+    </div>
+</div>

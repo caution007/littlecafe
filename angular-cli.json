@@ -18,11 +18,15 @@
       "tsconfig": "tsconfig.json",
       "prefix": "app",
       "styles": [
-        "styles.css"
+        "assets/css/styles.css"
       ],
-      "scripts": [],
+      "scripts": [
+        "assets/js/bootstrap.js",
+        "assets/js/bootstrap.min.js",
+        "assets/js/dropdowns.js"
+      ],
+      "environmentSource": "environments/environment.ts",
       "environments": {
-        "source": "environments/environment.ts",
         "dev": "environments/environment.ts",
         "prod": "environments/environment.prod.ts"
       }

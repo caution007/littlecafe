@@ -1,0 +1,29 @@
+<div class="navbar navbar-default">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">Little Cafe</a>
+    </div>
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <ul class="nav navbar-nav navbar-right">
+          <li>
+              <a routerLink="/frontpage" routerLinkActive="active">Home</a>
+          </li>
+          <li>
+              <a>Contact Us</a>
+          </li>
+          <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown">Menu <b class="caret"></b></a>
+              <ul class="dropdown-menu multi-level" role="menu" aria-labelledby="dropdownMenu" *ngIf="_menu">
+                  <li class="dropdown" *ngFor="let category of _menu">
+                      <a (click)="navToMenu(category.id)">{{category.name}}</a>
+                  </li>
+              </ul>
+          </li>
+      </ul>
+    </div>
+</div>

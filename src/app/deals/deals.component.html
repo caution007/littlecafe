@@ -1,0 +1,30 @@
+<div class="col-sm-5 col-md-4">
+    <div class="well well-sm" id='deals'> 
+        <div class="col-md-12">
+            <h3>Deals</h3>
+        </div>
+        <div *ngIf="_deals">
+            <div class="col-md-12" *ngFor="let deal of _deals">
+                <div class="col-md-1"></div>
+                <div class="col-xs-12 col-sm-6 col-md-10">
+                    <div class="col-item">
+                        <div class="photo">
+                            <img src="https://static.wixstatic.com/media/5242ee_74c2808d87204612897c54060dbb8ead~mv2.jpg/v1/fill/w_500,h_500,al_c,q_90/file.jpg" class="img-responsive" alt="a" />
+                        </div>
+                        <div class="info">
+                            <div class="row">
+                                <div class="price col-md-12">
+                                    <h5> {{deal.name}}</h5>
+                                    <h5 class="price-text-color">£{{deal.price | number:'.2-2'}}</h5>
+                                </div>
+                            </div>
+                            <div class="clearfix">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-1"></div>
+            </div>
+        </div>
+    </div>
+</div>
