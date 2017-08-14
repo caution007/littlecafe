@@ -3,6 +3,7 @@ import { Auth } from '../auth/auth.service';
 import { Router } from '@angular/router';
 
 import { AdminService } from '../services/admin.service';
+import { FrontpageService } from '../services/frontpage.service';
 
 @Component({
   selector: 'app-admin',
@@ -13,6 +14,7 @@ export class AdminComponent implements OnInit, OnDestroy {
 
   private _adminInformation;
   private _contactInformation;
+  private _frontPageInformation;
   private _user;
 
   private _currentCategory;
@@ -44,10 +46,12 @@ export class AdminComponent implements OnInit, OnDestroy {
   private _updateSubCatSub;
   private _updateItemSub;
   private _updateContactInfoSub;
+  private _updateFrontPageSub;
 
   private _createCatSub;
   private _createSubCatSub;
   private _createItemSub;
+  private _createNewsPostSub;
 
   // Create //
   // Category //
@@ -61,8 +65,13 @@ export class AdminComponent implements OnInit, OnDestroy {
   private _itemPrice;
   private _itemMenuOrder;
 
+  // News Post //
+  private _newsTitle;
+  private _newsBody;
+
   constructor(private _auth: Auth,
-                private _adminService: AdminService) { }
+                private _adminService: AdminService,
+                  private _frontPageService: FrontpageService) { }
 
   ngOnInit() {
     this._user = JSON.parse(localStorage.getItem('profile'));
@@ -75,6 +84,11 @@ export class AdminComponent implements OnInit, OnDestroy {
     this._adminService.contactInfo().subscribe(result => {
       console.log(result);
       this._contactInformation = result.contactInfo;
+    })
+
+    this._frontPageService.getFrontPageInfo().subscribe(result => {
+      console.log(result);
+      this._frontPageInformation = result.frontpage;
     })
   }
 
@@ -189,6 +203,14 @@ export class AdminComponent implements OnInit, OnDestroy {
     })
   }
 
+  updateFrontPage() {
+    this._updateFrontPageSub = this._adminService.updateFrontPage(this._frontPageInformation._id, this._frontPageInformation.main).subscribe(result => {
+      if (result.status == 'success') {
+        this._updateFrontPageSub.unsubscribe();
+      }
+    })
+  }
+
   createCategory() {
     var navPosition = (this._adminInformation.length + 1);
     this._createCatSub = this._adminService.createCategory(this._categoryName, navPosition).subscribe(result => {
@@ -198,4 +220,11 @@ export class AdminComponent implements OnInit, OnDestroy {
     })
   }
 
+  createNewsPost() {
+    this._createNewsPostSub = this._adminService.createNewsPost(this._newsTitle, this._newsBody).subscribe(result => {
+      if (result.status == 'success') {
+        this._createNewsPostSub.unsubscribe();
+      }
+    })
+  }
 }

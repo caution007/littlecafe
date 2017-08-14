@@ -18,5 +18,4 @@ export class NavigationService {
     return this._http.get(this._url + '/menu')
       .map(res => res.json());
   }
-
 }

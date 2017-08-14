@@ -14,7 +14,20 @@ export class FrontpageService {
       .map(res => res.json());
   }
 
+  getNewsPosts() {
+    return this._http.get(this._url + '/newsposts')
+      .map(res => res.json());
+  }
+
+  updateNewsPosts(postId, title, body) {
+    return this._http.post(this._url + '/update/newsposts', { postId, title, body })
+      .map(res => res.json());
+  
+  }
+
   getUrl() {
     return this._url;
   }
+
+
 }

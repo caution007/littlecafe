@@ -49,8 +49,18 @@ export class AdminService {
       .map(res => res.json());
   }
 
+  updateFrontPage(frontPageId, main) {
+    return this._http.post(this._url + '/update/frontpage', { frontPageId, main })
+      .map(res => res.json());
+  }
+
   createCategory(name, navPosition) {
     return this._http.post(this._url + '/create/category', { name, navPosition })
+      .map(res => res.json());
+  }
+
+  createNewsPost(title, body) {
+    return this._http.post(this._url + '/create/newspost', { title, body })
       .map(res => res.json());
   }
 

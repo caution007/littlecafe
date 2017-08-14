@@ -6,25 +6,16 @@
             </div>
             <div class="col-md-12">
                 <hr>
-                <!-- First Blog Post -->
-                <h3>
-                    News #1
-                </h3>
-                <p><i class="fa fa-clock-o"></i> Posted on August 28, 2013 at 10:00 PM</p>
-                
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolore, veritatis, tempora, necessitatibus inventore nisi quam quia repellat ut tempore laborum possimus eum dicta id animi corrupti debitis ipsum officiis rerum.</p>
-                
-                <hr>
-
-                <!-- First Blog Post -->
-                <h3>
-                    News #2
-                </h3>
-                <p><i class="fa fa-clock-o"></i> Posted on August 28, 2013 at 10:00 PM</p>
-                
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolore, veritatis, tempora, necessitatibus inventore nisi quam quia repellat ut tempore laborum possimus eum dicta id animi corrupti debitis ipsum officiis rerum.</p>
-
-                <hr>
+                <div *ngFor="let newsPost of _newsPosts">
+                    <h3>
+                        {{newsPost.title}} <p></p><button type="button" class="btn btn-primary" *ngIf="this._auth.authenticated()" (click)="createNewsPost()">Edit</button>
+                    </h3>
+                    <p><i class="fa fa-clock-o"></i> Posted on {{newsPost.posted}}</p>
+                    
+                    <p>{{newsPost.body}}</p>
+                    
+                    <hr>
+                </div>
             </div>
         </div>
     </div>

@@ -152,8 +152,43 @@
                         <!-- /.menu tab -->
 
                         <div class="tab-pane fade" id="frontpage-tab">
-                            <div>
-                                <h4>Information</h4>
+                            <div class="row">
+                                <div>
+                                    <h4>Front Page</h4>
+                                </div>
+                                <div class="col-lg-5" *ngIf="_frontPageInformation">
+                                    <div class="form-group row">
+                                        <label for="example-text-input" class="col-2 col-form-label">Main Body</label>
+                                        <div class="col-5">
+                                            <textarea class="form-control" name="frontPageMainBody" id="frontPageMainBody" rows="4" [(ngModel)]="_frontPageInformation.main"></textarea>
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <button type="button" class="btn btn-primary" (click)="updateFrontPage()">Update</button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div>
+                                    <h4>News Post</h4>
+                                </div>
+                                <div class="col-lg-5" *ngIf="_frontPageInformation">
+                                   <div class="form-group row">
+                                        <label for="example-text-input" class="col-2 col-form-label">Title</label>
+                                        <div class="col-5">
+                                            <input class="form-control" name="createNewsTitle" type="text" id="createNewsTitle" [(ngModel)]="_newsTitle">
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <label for="example-text-input" class="col-2 col-form-label">News Body</label>
+                                        <div class="col-5">
+                                            <textarea class="form-control" name="createNewsBody" id="createNewsBody" rows="4" [(ngModel)]="_newsBody"></textarea>
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <button type="button" class="btn btn-success" (click)="createNewsPost()">Post</button>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                         <!-- /.frontpage tab -->

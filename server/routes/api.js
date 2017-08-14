@@ -18,6 +18,7 @@ var Item = require('./models/itemModel').Item;
 var Admin = require('./models/adminModel').Admin;
 var Deal = require('./models/dealModel').Deal;
 var ContactInfo = require('./models/contactModel').ContactInfo;
+var NewsPost = require('./models/newsPostModel').NewsPost;
 
 // api listing //
 router.get('/', (req, res) => {
@@ -30,6 +31,17 @@ router.get('/frontpage', (req, res) => {
     .then((frontpage) => {
       frontpage = frontpage[0];
       res.json({ 'status': 'success', 'frontpage': frontpage });
+    }).catch((e) => {
+      res.json({ 'status': 'error', 'error': e });
+    })
+    .error(console.error);
+});
+
+// GET all news posts //
+router.get('/newsposts', (req, res) => {
+  NewsPost.findAsync({})
+    .then((newsPosts) => {
+      res.json({ 'status': 'success', 'newsPosts': newsPosts });
     }).catch((e) => {
       res.json({ 'status': 'error', 'error': e });
     })
@@ -237,6 +249,24 @@ router.post('/create/category', (req, res) => {
     .error(console.error);
 }) 
 
+router.post('/create/newspost', (req, res) => {
+  let date = new Date().toJSON().slice(0,10).replace(/-/g,'/');
+  let newsPost = new NewsPost({
+    title: req.body.title,
+    body: req.body.body,
+    posted: date
+  })
+
+  newsPost.saveAsync()
+    .then(post => {
+      res.json({ 'status': 'success', 'post': post });
+    })
+    .catch((e) => {
+      res.json({ 'status': 'error', 'error': e });
+    })
+    .error(console.error);
+})
+
 // UPDATES // 
 router.post('/update/category', (req, res) => {
   Category.findByIdAndUpdateAsync(
@@ -297,4 +327,38 @@ router.post('/update/contact', (req, res) => {
     })
     .error(console.error);
 }) 
+
+router.post('/update/frontpage', (req, res) => {
+  console.log(req.body);
+  FrontPageInfo.findByIdAndUpdateAsync(
+    req.body.frontPageId,
+    { $set: { main: req.body.main } })
+    .then(frontPage => {
+      res.json({ 'status': 'success', 'frontPage': frontPage });
+    })
+    .catch((e) => {
+      res.json({ 'status': 'error', 'error': e });
+    })
+    .error(console.error);
+})
+
+router.post('/update/newsposts', (req, res) => {
+  console.log(req.body);
+  NewsPost.findByIdAndUpdateAsync(
+    req.body.postId,
+    { $set: 
+      { 
+        title: req.body.title,
+        body: req.body.body
+      } 
+    })
+    .then(newsPost => {
+      res.json({ 'status': 'success', 'newsPost': newsPost });
+    })
+    .catch((e) => {
+      res.json({ 'status': 'error', 'error': e });
+    })
+    .error(console.error);
+})
+
 module.exports = router;
