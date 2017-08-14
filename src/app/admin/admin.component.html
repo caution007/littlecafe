@@ -1,16 +1,209 @@
 <div class="col-sm-7 col-md-8">
     <div class="well well-lg" id='mainContent'> 
         <div class="row">
-            <div class="col-lg-12">
-                <form class="form-horizontal">
-                  <div class="form-group">
-                      <label class="col-md-4 control-label" >Name</label>
-                      <div class="col-md-6">
-                          <input name="nameinput" type="text" [(ngModel)]="_name" class="form-control input-md">
-                      </div>
-                  </div>
-                  <!-- /.name input -->
-                </form>
+            <div class="col-md-12">
+                <div class="col-md-12">
+
+                    <ul id="adminTabs" class="nav nav-tabs nav-justified">
+                        <li class="active"><a href="#menu-tab" data-toggle="tab"><i class="fa fa-info-circle"></i> Menu</a>
+                        </li>
+                        <li class=""><a href="#frontpage-tab" data-toggle="tab"><i class="fa fa-gavel"></i> Front Page</a>
+                        </li>
+                        <li class=""><a href="#deals-tab" data-toggle="tab"><i class="fa fa-gavel"></i> Deals</a>
+                        </li>
+                        <li class=""><a href="#contact-tab" data-toggle="tab"><i class="fa fa-gavel"></i> Contact</a>
+                        </li>
+                    </ul>
+
+                    <div id="adminTabs" class="tab-content">
+                        <div class="tab-pane fade active in" id="menu-tab">
+                            <div>
+                                <h4>Menu</h4>
+                            </div>
+
+                            <form class="form-horizontal">
+                                <div class="form-group">
+
+                                    <label class="col-md-4 control-label" >Menu Item</label>
+                                    <div class="col-md-6">
+                                        <div class="dropdown">
+                                            <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                                                {{_menuItemName}}
+                                                <span class="caret"></span>
+                                            </button> 
+                                            <button type="button" class="btn btn-primary" *ngIf="_categoriesCheck" (click)="editMenuCheck(0)">Edit</button>
+                                            <button type="button" class="btn btn-success" (click)="editMenuCheck(3)">New</button>
+                                            <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                                                <li 
+                                                    *ngFor="let item of _adminInformation" 
+                                                    (click)='setCategories(_adminInformation.indexOf(item), item.name)'>
+                                                    <a>{{item.name}}</a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+
+                                    <label class="col-md-4 control-label" *ngIf="_categoriesCheck" >Categories</label>
+                                    <div class="col-md-6" *ngIf="_categoriesCheck">
+                                        <div class="dropdown">
+                                            <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                                                {{_categoriesName}}
+                                                <span class="caret"></span>
+                                            </button> 
+                                            <button type="button" class="btn btn-primary" *ngIf="_subCatCheck" (click)="editMenuCheck(1)">Edit</button>
+                                            <button type="button" class="btn btn-success" *ngIf="_categoriesCheck">New</button>
+                                            <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                                                <li 
+                                                    *ngFor="let cat of _adminInformation[_currentCategory].subCategories" 
+                                                    (click)='setItems(_adminInformation[_currentCategory].subCategories.indexOf(cat), cat.subCategory.name)'>
+                                                    <a>{{cat.subCategory.name}}</a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+
+                                    <label class="col-md-4 control-label" *ngIf="_subCatCheck">Items</label>
+                                    <div class="col-md-6" *ngIf="_subCatCheck">
+                                        <div class="dropdown">
+                                            <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu3" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                                                {{_itemsName}}
+                                                <span class="caret"></span>
+                                            </button> 
+                                            <button type="button" class="btn btn-primary" *ngIf="_itemCheck" (click)="editMenuCheck(2)">Edit</button>
+                                            <button type="button" class="btn btn-success" *ngIf="_subCatCheck">New</button>
+                                            <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                                                <li 
+                                                    *ngFor="let item of _adminInformation[_currentCategory].subCategories[_currentSubCat].items"
+                                                    (click)='clickItem(_adminInformation[_currentCategory].subCategories[_currentSubCat].items.indexOf(item), item.name)'>
+                                                    <a>{{item.name}}</a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    
+                                    <!-- Update Category Form -->
+                                    <div class="col-lg-5" *ngIf="_editCategoryCheck">
+                                        <div class="form-group row">
+                                            <label for="example-text-input" class="col-2 col-form-label">Name</label>
+                                            <div class="col-5">
+                                                <input class="form-control" name="categoryName" type="text"id="example-text-input" [(ngModel)]="_category.name">
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <button type="button" class="btn btn-primary" (click)="updateCategory()">Edit</button>
+                                        </div>
+                                    </div>
+
+                                    <!-- Update Sub Category Form -->
+                                    <div class="col-lg-5" *ngIf="_editSubCategoryCheck">
+                                        <div class="form-group row">
+                                            <label for="example-text-input" class="col-2 col-form-label">Name</label>
+                                            <div class="col-5">
+                                                <input class="form-control" name="subCategoryName" type="text"id="subCategoryName" [(ngModel)]="_subCategory.subCategory.name">
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <button type="button" class="btn btn-primary" (click)="updateSubCategory()">Edit</button>
+                                        </div>
+                                    </div>
+
+                                    <!-- Update Item Form -->
+                                    <div class="col-lg-5" *ngIf="_editItemCheck">
+                                        <div class="form-group row">
+                                            <label for="example-text-input" class="col-2 col-form-label">Name</label>
+                                            <div class="col-5">
+                                                <input class="form-control" name="itemName" type="text"id="itemName" [(ngModel)]="_item.name">
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label for="example-text-input" class="col-2 col-form-label">Price</label>
+                                            <div class="input-group">
+                                                <span class="input-group-addon">£</span>
+                                                <input class="form-control" name="itemPrice" type="text"id="itemPrice" [(ngModel)]="_item.price">
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label for="example-text-input" class="col-2 col-form-label">Menu Order</label>
+                                            <div class="input-group">
+                                                <input class="form-control" name="itemMenuOrder" type="text"id="itemMenuOrder" [(ngModel)]="_item.menuOrder">
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <button type="button" class="btn btn-primary" (click)="updateItem()">Edit</button>
+                                        </div>
+                                    </div>
+                                    
+                                    <!-- Create Category Form -->
+                                    <div class="col-lg-5" *ngIf="_createCategoryCheck">
+                                        <div class="form-group row">
+                                            <label for="example-text-input" class="col-2 col-form-label">Name</label>
+                                            <div class="col-5">
+                                                <input class="form-control" name="createCategoryName" type="text" id="createCategoryName" [(ngModel)]="_categoryName">
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <button type="button" class="btn btn-success" (click)="createCategory()">Create</button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- /.name input -->
+                            </form>
+                        </div>
+                        <!-- /.menu tab -->
+
+                        <div class="tab-pane fade" id="frontpage-tab">
+                            <div>
+                                <h4>Information</h4>
+                            </div>
+                        </div>
+                        <!-- /.frontpage tab -->
+
+                        <div class="tab-pane fade" id="deals-tab">
+                            <div>
+                                <h4>Information</h4>
+                            </div>
+                        </div>
+                        <!-- /.deals tab -->
+
+                        <div class="tab-pane fade" id="contact-tab">
+                            <div>
+                                <h4>Contact</h4>
+                            </div>
+                            <div class="col-lg-5" *ngIf="_contactInformation">
+                                <div class="form-group row">
+                                    <label for="example-text-input" class="col-2 col-form-label">Address Line #1</label>
+                                    <div class="col-5">
+                                        <input class="form-control" name="updateAddressLineOne" type="text" id="updateAddressLineOne" [(ngModel)]="_contactInformation.addressOne">
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label for="example-text-input" class="col-2 col-form-label">Address Line #2</label>
+                                    <div class="col-5">
+                                        <input class="form-control" name="updateAddressLineTwo" type="text" id="updateAddressLineTwo" [(ngModel)]="_contactInformation.addressTwo">
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label for="example-text-input" class="col-2 col-form-label">Telephone Number</label>
+                                    <div class="col-5">
+                                        <input class="form-control" name="updateNumber" type="tel" id="updateNumber" [(ngModel)]="_contactInformation.number">
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label for="example-text-input" class="col-2 col-form-label">E-Mail</label>
+                                    <div class="col-5">
+                                        <input class="form-control" name="updateEmail" type="email" id="updateEmail" [(ngModel)]="_contactInformation.email">
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <button type="button" class="btn btn-primary" (click)="updateContactInfo()">Update</button>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- /.contact tab -->
+
+                    </div>
+
+                </div>
             </div>
         </div>
     </div>

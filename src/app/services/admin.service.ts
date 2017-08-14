@@ -24,4 +24,34 @@ export class AdminService {
       .map(res => res.json());
   }
 
+  contactInfo() {
+    return this._http.get(this._url + '/contact')
+      .map(res => res.json());
+  }
+
+  updateCategory(catId, name) {
+    return this._http.post(this._url + '/update/category', { catId, name })
+      .map(res => res.json());
+  }
+
+  updateSubCategory(subCatId, name) {
+    return this._http.post(this._url + '/update/subcategory', { subCatId, name })
+      .map(res => res.json());
+  }
+
+  updateItem(itemId, name, price, menuOrder) {
+    return this._http.post(this._url + '/update/item', { itemId, name, price, menuOrder })
+      .map(res => res.json());
+  }
+
+  updateContactInfo(contactId, addressOne, addressTwo, number, email) {
+    return this._http.post(this._url + '/update/contact', { contactId, addressOne, addressTwo, number, email })
+      .map(res => res.json());
+  }
+
+  createCategory(name, navPosition) {
+    return this._http.post(this._url + '/create/category', { name, navPosition })
+      .map(res => res.json());
+  }
+
 }

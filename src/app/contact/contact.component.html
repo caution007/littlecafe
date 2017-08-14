@@ -1,3 +1,45 @@
-<p>
-  contact works!
-</p>
+<div class="col-sm-7 col-md-8">
+    <div class="well well-lg" id='mainContent'> 
+        <div class="row">
+          <div class="col-md-12">
+            <!-- Content Row -->
+        <div class="row">
+            <!-- Map Column -->
+            <div class="col-md-8">
+                <!-- Embedded Google Map -->
+                <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d9945.173349152949!2d-2.5924211!3d51.4527705!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x8588e48995c114e4!2sThe+Little+Cafe+on+the+Quay!5e0!3m2!1sen!2suk!4v1502491168097" width="100%" height="400" frameborder="0" style="border:0" allowfullscreen></iframe>
+            </div>
+            <!-- Contact Details Column -->
+            <div class="col-md-4" *ngIf="_contactInfo">
+                <h3>Details</h3>
+                <p>
+                    {{_contactInfo.addressOne}}<br>{{_contactInfo.addressTwo}}<br>
+                </p>
+                <p><i class="fa fa-phone"></i> 
+                    <abbr title="Phone">P</abbr>: {{_contactInfo.number}}</p>
+                <p><i class="fa fa-envelope-o"></i> 
+                    <abbr title="Email">E</abbr>: <a href="mailto:example@example.com">{{_contactInfo.email}}</a>
+                </p>
+                <p><i class="fa fa-clock-o"></i> 
+                    <abbr title="Hours">H</abbr>: Monday - Sunday: 9:00 AM to 5:00 PM</p>
+                <ul class="list-unstyled list-inline list-social-icons">
+                    <li>
+                        <a href="#"><i class="fa fa-facebook-square fa-2x"></i></a>
+                    </li>
+                    <li>
+                        <a href="#"><i class="fa fa-linkedin-square fa-2x"></i></a>
+                    </li>
+                    <li>
+                        <a href="#"><i class="fa fa-twitter-square fa-2x"></i></a>
+                    </li>
+                    <li>
+                        <a href="#"><i class="fa fa-google-plus-square fa-2x"></i></a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <!-- /.row -->
+          </div>
+        </div>
+    </div>
+</div>
