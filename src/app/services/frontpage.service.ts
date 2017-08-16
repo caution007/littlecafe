@@ -19,12 +19,6 @@ export class FrontpageService {
       .map(res => res.json());
   }
 
-  updateNewsPosts(postId, title, body) {
-    return this._http.post(this._url + '/update/newsposts', { postId, title, body })
-      .map(res => res.json());
-  
-  }
-
   getUrl() {
     return this._url;
   }

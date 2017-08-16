@@ -48,6 +48,17 @@ router.get('/newsposts', (req, res) => {
     .error(console.error);
 });
 
+// GET one news posts //
+router.get('/newsposts/:id', (req, res) => {
+  NewsPost.findByIdAsync(req.params.id)
+    .then((newsPost) => {
+      res.json({ 'status': 'success', 'newsPost': newsPost });
+    }).catch((e) => {
+      res.json({ 'status': 'error', 'error': e });
+    })
+    .error(console.error);
+});
+
 // GET contact information //
 router.get('/contact', (req, res) => {
   ContactInfo.findAsync({})

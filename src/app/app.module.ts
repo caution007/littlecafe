@@ -26,6 +26,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AdminComponent } from './admin/admin.component';
 import { AdminloginComponent } from './admin/adminlogin/adminlogin.component';
 import { AdminitemComponent } from './admin/adminitem/adminitem.component';
+import { EditnewspostComponent } from './admin/editnewspost/editnewspost.component';
 
 export function authHttpServiceFactory(http: Http, options: RequestOptions) {
   return new AuthHttp(new AuthConfig({
@@ -45,7 +46,8 @@ export function authHttpServiceFactory(http: Http, options: RequestOptions) {
     MenuComponent,
     AdminComponent,
     AdminloginComponent,
-    AdminitemComponent
+    AdminitemComponent,
+    EditnewspostComponent
   ],
   imports: [
     BrowserModule,

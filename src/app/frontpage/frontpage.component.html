@@ -8,7 +8,7 @@
                 <hr>
                 <div *ngFor="let newsPost of _newsPosts">
                     <h3>
-                        {{newsPost.title}} <p></p><button type="button" class="btn btn-primary" *ngIf="this._auth.authenticated()" (click)="createNewsPost()">Edit</button>
+                        {{newsPost.title}} <p></p><button type="button" class="btn btn-primary" *ngIf="this._auth.authenticated()" (click)="navToEditNewsPost(newsPost._id)">Edit</button>
                     </h3>
                     <p><i class="fa fa-clock-o"></i> Posted on {{newsPost.posted}}</p>
                     

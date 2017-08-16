@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Auth } from '../auth/auth.service';
 import * as moment from 'moment';
 
@@ -15,7 +16,8 @@ export class FrontpageComponent implements OnInit {
   private _newsPosts;
 
   constructor(private _frontPageService: FrontpageService,
-                private _auth: Auth) { }
+                private _auth: Auth,
+                  private _router: Router) { }
 
   ngOnInit() {
 
@@ -34,4 +36,7 @@ export class FrontpageComponent implements OnInit {
     })
   }
 
+  navToEditNewsPost(newsPostId) {
+    this._router.navigate(['/editnewspost', newsPostId]);
+  }
 }

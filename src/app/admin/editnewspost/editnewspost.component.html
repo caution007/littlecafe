@@ -1,0 +1,30 @@
+<div class="col-sm-7 col-md-8">
+    <div class="well well-lg" id='mainContent'> 
+        <div class="row">
+          <div class="col-md-12">
+            <div class="row">
+                <div>
+                    <h4>Edit News Post</h4>
+                </div>
+                <div class="col-lg-5" *ngIf="_newsPost">
+                    <div class="form-group row">
+                        <label for="example-text-input" class="col-2 col-form-label">Title</label>
+                        <div class="col-5">
+                            <input class="form-control" name="editNewsTitle" type="text" id="editNewsTitle" [(ngModel)]="_newsPost.title">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="example-text-input" class="col-2 col-form-label">News Body</label>
+                        <div class="col-5">
+                            <textarea class="form-control" name="editNewsBody" id="editNewsBody" rows="4" [(ngModel)]="_newsPost.body"></textarea>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <button type="button" class="btn btn-primary" (click)="updateNewsPost()">Update</button>
+                    </div>
+                </div>
+            </div>
+          </div>
+        </div>
+    </div>
+</div>

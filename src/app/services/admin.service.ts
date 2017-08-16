@@ -29,6 +29,11 @@ export class AdminService {
       .map(res => res.json());
   }
 
+  getNewsPost(id) {
+    return this._http.get(this._url + '/newsposts/' + id)
+      .map(res => res.json());
+  }
+
   updateCategory(catId, name) {
     return this._http.post(this._url + '/update/category', { catId, name })
       .map(res => res.json());
@@ -52,6 +57,12 @@ export class AdminService {
   updateFrontPage(frontPageId, main) {
     return this._http.post(this._url + '/update/frontpage', { frontPageId, main })
       .map(res => res.json());
+  }
+
+  updateNewsPost(postId, title, body) {
+    return this._http.post(this._url + '/update/newsposts', { postId, title, body })
+      .map(res => res.json());
+  
   }
 
   createCategory(name, navPosition) {
